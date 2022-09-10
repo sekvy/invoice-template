@@ -1,0 +1,82 @@
+\documentclass[letterpaper]{invoicecls}
+%\documentclass[letterpaper,currency=dollar]{invoicecls}
+%\documentclass[letterpaper,currency=euro]{invoicecls}
+%\documentclass[letterpaper,currency=pound]{invoicecls}
+
+\newcommand{\invoiceNo}{ $invoiceNo$ }
+\newcommand{\duein}{$dueDateMonthOffset$}% Months
+
+\newcommand{\me}{ $myCompany$ }
+\newcommand{\clientName}{ $clientName$ }
+
+\setmetadata{\me}{$myCompany$}{\invoiceNo}{\clientName}
+
+\defaultfontfeatures{ Path = ./Fonts/ }
+\usepackage{fontawesome}
+
+\pagestyle{fancy}
+\fancyfoot[LO,CE]{Godkänd för F-skattesedel / Approval for F-tax}
+
+%Debugging multicol
+%\usepackage{color}
+%\setlength{\columnseprule}{1pt}
+%\def\columnseprulecolor{\color{blue}}
+
+\begin{document}
+
+\newfontface\mainLightItalic{OpenSans-LightItalic}
+\makeheader{$myCompany$}{\invoiceNo}
+
+\twocolumnlayout{
+    \begin{infoSection}{Client}
+        $for(to)$
+        \infoBox{$to$}
+        $endfor$
+    \end{infoSection}
+}{
+    \begin{infoSection}{Please send payment to}
+        $for(bank)$
+        \infoBox{$bank$}
+        $endfor$
+    \end{infoSection}
+}
+
+\vspace{2em}
+
+\begin{hoursItemization}
+    $for(service)$
+    \lineitem{$service.date$}{$service.hours$}{$service.rate$}{$service.description$}{ $if(service.details)$ $for(service.details)$ \scriptsize \item $service.details$ $endfor$ $endif$ }
+    $endfor$
+    \beginsummary
+
+    \summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
+
+    \summaryline{VAT 0\% \tiny *Article 44 VAT directive}{\currencysym\formatcurrency{0}}
+    \summaryline{Balance Due}{\currencysym\formatcurrency{\InvoiceTotal}} % not really any math support (yet)
+
+\end{hoursItemization}
+
+\vfill
+\noindent\rule{\textwidth}{1pt}
+\textbf{$myCompany$}
+\begin{multicols}{3}
+    % Contact
+    \begin{footerSection}{Contact}
+        $for(addressLines)$
+        \infoBox{$addressLines$}
+        $endfor$
+        \infoBox{\faMobilePhone\hspace{2mm} \small $contact.phone$}
+        \infoBox{\tiny\faEnvelope\small \hspace{2mm} \emaillink{$contact.email$}}
+    \end{footerSection} \columnbreak \newline %
+    % VAT number
+    \begin{footerSection}{VAT no}
+        \infoBox{$VATno$}
+    \end{footerSection} \columnbreak \newline %
+    % Bank account info
+    \begin{footerSection}{Bank account info}
+        $for(bank)$
+        \infoBox{$bank$}
+        $endfor$
+    \end{footerSection}\columnbreak
+\end{multicols}
+\end{document}

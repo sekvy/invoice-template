@@ -1,0 +1,41 @@
+---
+invoiceNo: 69
+myCompany: "My Company AB"
+VATno: "SE 12312312311"
+dueDateMonthOffset: 1
+
+clientName: "Client Name"
+
+addressLines:
+- AddressLine 1
+- Adressline 2, Country
+
+contact:
+  phone: +1 1231231231
+  email: email@email.email
+
+to:
+- Client name
+- 123 Street Address
+- City, State 55555
+
+bank:
+- "Bank: My Bank"
+- "IBAN: xxx xxx xxx xxx"
+- "BIC: xxx xxx xxx xxx"
+
+service:
+- description: The first service provided
+  date: 2022-09-20
+  hours: 10
+  rate: 30
+  details:
+  - Some more detailed explanation
+  - of the service provided
+  - Looking good
+- description: The second service provided. No list items
+  date: 2022-09-20
+  hours: 10
+  rate: 30
+  details:
+---
