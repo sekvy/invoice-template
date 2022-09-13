@@ -7,3 +7,5 @@
 .vagrant/
 *.synctex(busy)
 *.synctex
+*.yaml
+!exampleDetails.yaml
