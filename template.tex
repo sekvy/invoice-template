@@ -5,10 +5,7 @@
 
 \newcommand{\invoiceNo}{$invoiceNo$}
 \newcommand{\duein}{$dueDateMonthOffset$}% Months
-
-\newcommand{\me}{ $myCompany$ }
-\newcommand{\clientName}{ $clientName$ }
-
+\newcommand{\me}{$myCompany$}
 \setmetadata{\me}{\invoiceNo}
 
 \defaultfontfeatures{ Path = ./Fonts/ }
@@ -25,7 +22,7 @@
 \begin{document}
 
 \newfontface\mainLightItalic{OpenSans-LightItalic}
-\makeheader{$myCompany$}{\invoiceNo}
+\makeheader{\me}{\invoiceNo}
 
 \twocolumnlayout{
     \begin{infoSection}{Client}
@@ -47,7 +44,7 @@
     $for(service)$
     \lineitem{$service.date$}{$service.hours$}{$service.rate$}{$service.description$}{ $if(service.details)$ $for(service.details)$ \scriptsize \item $service.details$ $endfor$ $endif$ }
     $endfor$
-    
+
     \beginsummary
     \summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
     \summaryline{VAT 0\% \tiny *Article 44 VAT directive}{\currencysym\formatcurrency{0}}
@@ -56,7 +53,7 @@
 
 \vfill
 \noindent\rule{\textwidth}{1pt}
-\textbf{$myCompany$}
+\textbf{\me}
 \begin{multicols}{3}
     % Contact
     \begin{footerSection}{Contact}
