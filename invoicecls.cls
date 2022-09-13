@@ -37,7 +37,7 @@
 \RequirePackage{fancyhdr}
 
 % For tables
-\RequirePackage{longtable}
+\RequirePackage{tabularx}
 \RequirePackage{multicol}
 
 % Caluclating due date
@@ -138,98 +138,34 @@
 \newcommand*{\itemizationHeaderStyle}[0]{\normalsize}
 \newcounter{colskipcount}
 
-\newenvironment{basicItemization}{
-    \setcounter{colskipcount}{2}
-    \setlength\LTleft{0pt}
-    \setlength\LTright{0pt}
-    \begin{longtable}{c @{\hspace{1.5em}} p{.6\textwidth} r}
-    \hline
-    \noalign{\smallskip}
-    {\itemizationHeaderStyle Date} &
-    {\itemizationHeaderStyle Description} &
-    {\itemizationHeaderStyle Amount}
-    \\
-    \noalign{\smallskip}
-    \hline
-    \noalign{\bigskip}
-    \endhead
-    \noalign{\bigskip}
-    \hline
-    \endfoot
-    \endlastfoot
-}{
-    \end{longtable}
-}
-
-\usepackage{ltablex}
-\keepXColumns
-
-\newenvironment{hoursItemization}{
-    \setcounter{colskipcount}{5}
-    \setlength\LTleft{0pt}
-    \setlength\LTright{0pt}
-    \begin{longtable}{c @{\hspace{1.5em}} p{.50\textwidth} r @{} l r r}
-    \hline
-    \noalign{\smallskip}
-    {\itemizationHeaderStyle Date} &
-    {\itemizationHeaderStyle Description} &
-    \multicolumn{2}{l}{\itemizationHeaderStyle Hours} &
-    {\itemizationHeaderStyle Rate} &
-    {\itemizationHeaderStyle Amount}
-    \\
-    \noalign{\smallskip}
-    \hline
-    \noalign{\bigskip}
-    \endhead
-    \noalign{\bigskip}
-    \hline
-    \endfoot
-    \endlastfoot
-}{
-    \end{longtable}
-}
-
-\newenvironment{hoursItemizationWithProject}{
-    \setcounter{colskipcount}{6}
-    \setlength\LTleft{0pt}
-    \setlength\LTright{0pt}
-    \begin{longtable}{c c @{\hspace{1.5em}} p{.5\textwidth} r @{} l r r}
-    \hline
-    \noalign{\smallskip}
-    {\itemizationHeaderStyle Date} &
-    {\itemizationHeaderStyle Project} &
-    {\itemizationHeaderStyle Description} &
-    \multicolumn{2}{l}{\itemizationHeaderStyle Hours} &
-    {\itemizationHeaderStyle Rate} &
-    {\itemizationHeaderStyle Amount}
-    \\
-    \noalign{\smallskip}
-    \hline
-    \noalign{\bigskip}
-    \endhead
-    \noalign{\bigskip}
-    \hline
-    \endfoot
-    \endlastfoot
-}{
-    \end{longtable}
-}
+\newenvironment{hoursItemization}
+  {   \setcounter{colskipcount}{4}
+      \tabularx{\textwidth}{c X c r r}
+      \hline
+      \noalign{\smallskip}
+      {\itemizationHeaderStyle Date} &
+      {\itemizationHeaderStyle Description} &
+      {\itemizationHeaderStyle Hours} &
+      {\itemizationHeaderStyle Rate}  &
+      {\itemizationHeaderStyle Amount} \\
+      \hline
+      \noalign{\bigskip}
+  }
+  {\endtabularx}
 
 \gdef\InvoiceTotal{0}
 
 \newcommand*{\calcamount}[2]{%
     \FPmul\t{#1}{#2}%
     \formatcurrency{\t}%
-%
-    \FPadd\gt{\InvoiceTotal}{\t}%
-    \global\let\InvoiceTotal\gt%
-}
-
-\newcommand*{\calcamountb}[1]{%
-    \formatcurrency{#1}%
-%
-    \FPadd\gt{\InvoiceTotal}{#1}%
-    \global\let\InvoiceTotal\gt%
+    % TabularX runs the body multiple times https://tex.stackexchange.com/a/227155
+    % Since InvoiceTotal is a global variable it'd count those runs as well.
+    % Check if it's the final run. This seems hacky, but keeping it until a better soultion if found.
+    \ifx\@tempdima\hfuzz%
+    \else%
+        \FPadd\gt{\InvoiceTotal}{\t}%
+        \global\let\InvoiceTotal\gt%
+    \fi%
 }
 
 \newcommand*\@formatFraction[1]{
@@ -257,17 +193,6 @@
     \fi%
 }
 
-\newcommand{\lineitemb}[3]{  %{Date}{Amount}{Description}
-    {\itemizationRowStyle #1} &
-    \begin{minipage}[t]{.6\textwidth}
-        \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #3 \end{itemize}
-    \end{minipage} &
-    {\itemizationRowStyle \currencysym\calcamountb{#2}}
-    \\
-    \noalign{\medskip}
-}
-
-
 \newcommand{\lineitem}[5]{  %{Date}{Hours}{Rate}{Description}
     {\itemizationRowStyle \dateNoDay{#1}} &
     \begin{minipage}[t]{.6\textwidth}
@@ -279,26 +204,11 @@
            \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #5 \end{itemize}%
         }%
     \end{minipage} &
-    {\itemizationRowStyle \@formatHoursLeft{#2}} &
-    {\itemizationRowStyle \@formatHoursRight{#2}} &
-    {\itemizationRowStyle \currencysym#3} &
-    {\itemizationRowStyle \currencysym\calcamount{#2}{#3}}
-    \\ \\
-    \noalign{\medskip}
-}
-
-\newcommand{\lineitemp}[5]{  %{Date}{Hours}{Rate}{Project}{Description}
-    {\itemizationRowStyle #1} &
-    {\itemizationRowStyle #4} &
-    \begin{minipage}[t]{0.5\textwidth}
-        \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #5 \end{itemize}
-    \end{minipage} &
-    {\itemizationRowStyle \@formatHoursLeft{#2}} &
-    {\itemizationRowStyle \@formatHoursRight{#2}} &
+    {\itemizationRowStyle \@formatHoursLeft{#2}} {\itemizationRowStyle \@formatHoursRight{#2}} &
     {\itemizationRowStyle \currencysym#3} &
     {\itemizationRowStyle \currencysym\calcamount{#2}{#3}}
     \\
-    \noalign{\medskip}
+    \noalign{\bigskip}
 }
 
 \newcommand{\beginsummary}{

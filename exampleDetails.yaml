@@ -27,7 +27,7 @@ bank:
 service:
 - description: The first service provided
   date: 2022-09-20
-  hours: 10
+  hours: 10.25
   rate: 30
   details:
   - Some more detailed explanation

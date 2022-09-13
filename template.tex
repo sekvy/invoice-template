@@ -47,13 +47,11 @@
     $for(service)$
     \lineitem{$service.date$}{$service.hours$}{$service.rate$}{$service.description$}{ $if(service.details)$ $for(service.details)$ \scriptsize \item $service.details$ $endfor$ $endif$ }
     $endfor$
+    
     \beginsummary
-
     \summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
-
     \summaryline{VAT 0\% \tiny *Article 44 VAT directive}{\currencysym\formatcurrency{0}}
-    \summaryline{Balance Due}{\currencysym\formatcurrency{\InvoiceTotal}} % not really any math support (yet)
-
+    \summaryline{Balance Due}{\currencysym\formatcurrency{\InvoiceTotal}}
 \end{hoursItemization}
 
 \vfill
