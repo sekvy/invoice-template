@@ -74,14 +74,14 @@
 
 %%%%% Commands %%%%%
 
-\newcommand*{\setmetadata}[4]{
+\newcommand*{\setmetadata}[2]{
     \hypersetup{
         bookmarksopen  = false,
         bookmarksdepth = 2,% to show sections and subsections
         pdfauthor      = {#1},
-        pdftitle       = {#2 --- Invoice \##3 for #4},
-        pdfsubject     = {Invoice \##3},
-        pdfkeywords    = {invoice, #2, #4}
+        pdftitle       = {Invoice \##2},
+        pdfsubject     = {Invoice \##2},
+        pdfkeywords    = {invoice, #2, #1}
     }
 }
 

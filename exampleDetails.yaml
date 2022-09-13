@@ -4,8 +4,6 @@ myCompany: "My Company AB"
 VATno: "SE 12312312311"
 dueDateMonthOffset: 1
 
-clientName: "Client Name"
-
 addressLines:
 - AddressLine 1
 - Adressline 2, Country
