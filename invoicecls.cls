@@ -71,7 +71,6 @@
     \setsansfont[ BoldFont = OpenSans-Bold, ItalicFont = OpenSans-Italic ]{OpenSans-Regular}
 }{}
 
-
 %%%%% Commands %%%%%
 
 \newcommand*{\setmetadata}[2]{
@@ -105,9 +104,9 @@
 \newcommand*{\duedate}[1]{%
 \SaveDate
 \AdvMonth{#1}
-\DTMsavedate{mydate}{\the\year-\the\month-\the\day}
-\DTMusedate{mydate}
-\SetDate
+\DTMsavedate{mydate}{\the\year-\the\month-\the\day}%
+\DTMusedate{mydate}%
+\SetDate%
 }
 
 \newcommand*{\dateNoDay}[1]{%
@@ -201,10 +200,10 @@
         {%
            % Empty
         }{%
-           \begin{itemize}[leftmargin=0pt, labelsep=1pt, itemsep=0pt] \itemizationRowStyle #5 \end{itemize}%
+           \begin{itemize}[leftmargin=5pt, labelsep=2pt, itemsep=0pt] \itemizationRowStyle #5 \end{itemize}%
         }%
     \end{minipage} &
-    {\itemizationRowStyle \@formatHoursLeft{#2}} {\itemizationRowStyle \@formatHoursRight{#2}} &
+    {\itemizationRowStyle \@formatHoursLeft{#2}}{\itemizationRowStyle \@formatHoursRight{#2}} &
     {\itemizationRowStyle \currencysym#3} &
     {\itemizationRowStyle \currencysym\calcamount{#2}{#3}}
     \\
