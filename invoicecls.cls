@@ -10,11 +10,15 @@
 \SetupKeyvalOptions{%
     prefix=invoicecls@
 }
+
 % Default currency option is "dollar"
 \DeclareStringOption[dollar]{currency}[dollar]
 \ProcessKeyvalOptions*
 
 \RequirePackage{eurosym}
+
+% Customizing lists
+\RequirePackage{enumitem}
 
 \ifthenelse{\equal{\invoicecls@currency}{dollar}}{\newcommand{\currencysym}{\$}}{}
 \ifthenelse{\equal{\invoicecls@currency}{euro}}{\newcommand{\currencysym}{\euro}}{}
@@ -39,10 +43,8 @@
 \RequirePackage{tabularx}
 \RequirePackage{multicol}
 
-% Caluclating due date
+% Dates
 \RequirePackage{advdate}
-
-% Caluclating due date
 \RequirePackage[en-US]{datetime2}
 
 % Localization
@@ -51,9 +53,6 @@
 % For invoice math
 \RequirePackage{fp}
 \RequirePackage{tikz}
-
-% Customizing lists
-\RequirePackage{enumitem}
 
 % Formatting numbers
 \RequirePackage{siunitx}
@@ -84,7 +83,7 @@
 }
 
 \newcommand*{\twocolumnlayout}[2]{
-    \begingroup #1 \hfill #2 \endgroup
+    #1 \hfill #2
 }
 
 \sodef\invoiceSpacing{}{.15em}{.4em}{.4em}
@@ -92,9 +91,9 @@
     \begin{minipage}[t]{.6\linewidth} {\headerStyle #1} \end{minipage}
     \hfill
     \begin{tabular}[t]{@{} c @{}}
-        {\headerStyle \invoiceSpacing{INVOICE} \##2} \\
-        {\color{subduedColor} \today} \\
-        {\small\color{subduedColor} due \duedate{\duein}}
+        {\headerStyle \invoiceSpacing{INVOICE} \##2} \smallskip \\
+        {\today} \\
+        {\small due \duedate{\duein}}
     \end{tabular}
 
     \addvspace{8ex}
@@ -121,12 +120,6 @@
 \newenvironment*{infoSection}[1]{\tabular[t]{l}\titleStyle{#1:}\\}{\endtabular}
 \newenvironment*{footerSection}[1]{\tabular[t]{l}\footerTitleStyle{#1:}\\}{\endtabular}
 \newcommand{\infoBox}[1]{#1 \\}
-\newcommand{\infoSub}[2]{
-    \noalign{\vspace{-1.8ex}}
-    {#1} & \begin{minipage}[t]{.35\textwidth} \infoSubStyle #2 \end{minipage} \\
-    %{\color{subduedColor} #1} & \begin{minipage}[t]{.35\textwidth} \infoSubStyle #2 \end{minipage} \\
-    \noalign{\addvspace{2ex}}
-}
 
 \newcommand{\emaillink}[1]{%
     \href{mailto:#1}{#1}%
@@ -233,11 +226,6 @@
 \newcommand{\showbb}[1]{{\color{red!50}\leavevmode\rlap{\fbox{\phantom{#1}}}}#1}
 
 %%%%% Styles %%%%%
-
-\RequirePackage{xcolor}
-\definecolor{highlightColor}{rgb}{0.22,0.45,0.70}% light blue
-\definecolor{subduedColor}{rgb}{0.45,0.45,0.45}% dark grey
-
 \def\headerStyle{\Huge}
 \def\titleStyle{\large\bf}
 \def\footerTitleStyle{\small\bf}
