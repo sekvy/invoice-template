@@ -1,14 +1,12 @@
 TEX = pandoc
-src = template.tex details.yaml
-exampleSrc = template.tex exampleDetails.yaml
 FLAGS = --pdf-engine=xelatex
 
-invoice.pdf : $(src)
-	$(TEX) -f markdown $(filter-out $<,$^ ) -o $@ --template=$< $(FLAGS)
+invoice.pdf : template.tex details.yaml invoicecls.cls
+	$(TEX) -f markdown template.tex details.yaml -o $@ --template=$< $(FLAGS)
 
-example : $(exampleSrc)
-	$(TEX) -f markdown $(filter-out $<,$^ ) -o $@.pdf --template=$< $(FLAGS)
+example : template.tex exampleDetails.yaml invoicecls.cls
+	$(TEX) -f markdown template.tex exampleDetails.yaml -o $@.pdf --template=$< $(FLAGS)
 
 .PHONY: clean
 clean :
-	rm *.pdf
+	rm -f *.pdf *.out *aux *log *.synctex\(busy\)

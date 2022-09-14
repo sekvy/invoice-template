@@ -1,4 +1,3 @@
-
 \ProvidesClass{invoicecls}[2022/09/11 invoice doc settings]
 \NeedsTeXFormat{LaTeX2e}
 \LoadClass[11pt]{article}
@@ -102,18 +101,18 @@
 }
 
 \newcommand*{\duedate}[1]{%
-\SaveDate
-\AdvMonth{#1}
-\DTMsavedate{mydate}{\the\year-\the\month-\the\day}%
-\DTMusedate{mydate}%
-\SetDate%
+    \SaveDate
+    \AdvMonth{#1}
+    \DTMsavedate{mydate}{\the\year-\the\month-\the\day}%
+    \DTMusedate{mydate}%
+    \SetDate%
 }
 
 \newcommand*{\dateNoDay}[1]{%
-\DTMsavedate{mydate}{#1}
-\DTMlangsetup{showdayofmonth=false}
-\DTMusedate{mydate}
-\DTMlangsetup{showdayofmonth=true}
+    \DTMsavedate{mydate}{#1}
+    \DTMlangsetup{showdayofmonth=false}
+    \DTMusedate{mydate}
+    \DTMlangsetup{showdayofmonth=true}
 }
 
 \newcommand*{\infoSectionStyle}{\hspace{2em}}
