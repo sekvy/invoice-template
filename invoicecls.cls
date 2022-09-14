@@ -122,7 +122,7 @@
 
 \newenvironment*{infoSection}[1]{\tabular[t]{l}\titleStyle{#1:}\\}{\endtabular}
 \newenvironment*{footerSection}[1]{\tabular[t]{l}\footerTitleStyle{#1:}\\}{\endtabular}
-\newcommand{\infoBox}[1]{#1 \\}
+\newcommand{\sectionItem}[1]{#1 \\}
 
 \newcommand{\emaillink}[1]{%
     \href{mailto:#1}{#1}%
@@ -146,6 +146,9 @@
       \noalign{\bigskip}
   }
   {\endtabularx}
+
+\newenvironment{contactIconItemization}{\tabular[t]{@{}c@{}@{}l@{}}}{\endtabular}
+\newcommand{\contactIconItem}[2]{#1 & \hspace{8pt}\small#2\\}
 
 \gdef\InvoiceTotal{0}
 

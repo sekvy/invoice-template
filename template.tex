@@ -27,13 +27,13 @@
 \twocolumnlayout{
     \begin{infoSection}{Client}
         $for(client)$
-        \infoBox{$client$}
+        \sectionItem{$client$}
         $endfor$
     \end{infoSection}
 }{
     \begin{infoSection}{Please send payment to}
         $for(bank)$
-        \infoBox{$bank$}
+        \sectionItem{$bank$}
         $endfor$
     \end{infoSection}
 }
@@ -58,19 +58,24 @@
     % Contact
     \begin{footerSection}{Contact}
         $for(addressLines)$
-        \infoBox{$addressLines$}
+        \sectionItem{$addressLines$}
         $endfor$
-        \infoBox{\faMobilePhone\hspace{2mm} \small $contact.phone$}
-        \infoBox{\tiny\faEnvelope\small \hspace{2mm} \emaillink{$contact.email$}}
+        \sectionItem{
+            % Contact information with icon e.g email, phone, github.
+            \begin{contactIconItemization}
+                \contactIconItem{\faMobile}{$contact.phone$}
+                \contactIconItem{\small\faEnvelopeO}{$contact.email$}
+            \end{contactIconItemization}
+        }
     \end{footerSection} \columnbreak \newline %
     % VAT number
     \begin{footerSection}{VAT no}
-        \infoBox{$VATno$}
+        \sectionItem{$VATno$}
     \end{footerSection} \columnbreak \newline %
     % Bank account info
     \begin{footerSection}{Bank account info}
         $for(bank)$
-        \infoBox{$bank$}
+        \sectionItem{$bank$}
         $endfor$
     \end{footerSection}\columnbreak
 \end{multicols}
