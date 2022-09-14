@@ -9,10 +9,12 @@ addressLines:
 - Adressline 2, Country
 
 contact:
-  phone: +1 1231231231
+  phone: +1 212 555 0123
+  # Also possible to use https://www.ctan.org/pkg/phonenumbers
+  # phone: \phonenumber[country=US,foreign]{2125550123}
   email: email@email.email
 
-to:
+client:
 - Client name
 - 123 Street Address
 - City, State 55555

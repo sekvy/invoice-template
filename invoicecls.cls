@@ -50,6 +50,9 @@
 % Localization
 \RequirePackage[english]{babel}
 
+% Phone numbers formatting
+\RequirePackage{phonenumbers}
+
 % For invoice math
 \RequirePackage{fp}
 \RequirePackage{tikz}
