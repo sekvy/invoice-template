@@ -12,7 +12,7 @@
 \usepackage{fontawesome}
 
 \pagestyle{fancy}
-\fancyfoot[LO,CE]{Godkänd för F-skattesedel / Approval for F-tax}
+\fancyfoot[LO,CE]{$footer$}
 
 %Debugging multicol
 %\usepackage{color}
@@ -27,13 +27,13 @@
 \twocolumnlayout{
     \begin{infoSection}{Client}
         $for(client)$
-        \sectionItem{$client$}
+            \sectionItem{$client$}
         $endfor$
     \end{infoSection}
 }{
     \begin{infoSection}{Please send payment to}
         $for(bank)$
-        \sectionItem{$bank$}
+            \sectionItem{$bank$}
         $endfor$
     \end{infoSection}
 }
@@ -42,7 +42,7 @@
 
 \begin{hoursItemization}
     $for(service)$
-    \lineitem{$service.date$}{$service.hours$}{$service.rate$}{$service.description$}{ $if(service.details)$ $for(service.details)$ \scriptsize \item $service.details$ $endfor$ $endif$ }
+        \lineitem{$service.date$}{$service.hours$}{$service.rate$}{$service.description$}{ $if(service.details)$ $for(service.details)$ \scriptsize \item $service.details$ $endfor$ $endif$ }
     $endfor$
 
     \beginsummary
@@ -58,7 +58,7 @@
     % Contact
     \begin{footerSection}{Contact}
         $for(addressLines)$
-        \sectionItem{$addressLines$}
+            \sectionItem{$addressLines$}
         $endfor$
         \sectionItem{
             % Contact information with icon e.g email, phone, github.
@@ -75,7 +75,7 @@
     % Bank account info
     \begin{footerSection}{Bank account info}
         $for(bank)$
-        \sectionItem{$bank$}
+            \sectionItem{$bank$}
         $endfor$
     \end{footerSection}\columnbreak
 \end{multicols}

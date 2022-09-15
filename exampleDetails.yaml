@@ -38,4 +38,6 @@ service:
   hours: 10
   rate: 30
   details:
+
+footer: Godkänd för F-skattesedel / Approval for F-tax
 ---
