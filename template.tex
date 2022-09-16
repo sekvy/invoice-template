@@ -6,6 +6,7 @@
 \newcommand{\invoiceNo}{$invoiceNo$}
 \newcommand{\duein}{$dueDateMonthOffset$}% Months
 \newcommand{\me}{$myCompany$}
+\newcommand{\vatPercent}{$vatPercent$}
 \setmetadata{\me}{\invoiceNo}
 
 \defaultfontfeatures{ Path = ./Fonts/ }
@@ -46,9 +47,9 @@
     $endfor$
 
     \beginsummary
-    \summaryline{Total}{\currencysym\formatcurrency{\InvoiceTotal}}
-    \summaryline{VAT 0\% \scriptsize *Article 44 VAT directive}{\currencysym\formatcurrency{0}}
-    \summaryline{Balance Due}{\currencysym\formatcurrency{\InvoiceTotal}}
+    \summaryline{Subtotal:}{\currencysym\formatcurrency{\subtotal}}
+    \summaryline{VAT \vatPercent\%$if(vatComment)$ \scriptsize $vatComment$ $endif$\normalsize:}{\currencysym\vattotal}
+    \summaryline{\textbf{Total:}}{\currencysym\total}
 \end{hoursItemization}
 
 \vfill

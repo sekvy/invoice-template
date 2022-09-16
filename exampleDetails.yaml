@@ -1,8 +1,10 @@
 ---
 invoiceNo: 69
 myCompany: "My Company AB"
-VATno: "SE 12312312311"
 dueDateMonthOffset: 1
+VATno: "SE 12312312311"
+vatPercent: 0
+vatComment: "*Article 44 VAT directive"
 
 addressLines:
 - AddressLine 1
@@ -27,15 +29,15 @@ bank:
 service:
 - description: The first service provided
   date: 2022-09-20
-  hours: 10.25
+  hours: 10
   rate: 30
   details:
   - Some more detailed explanation
   - of the service provided
   - Looking good
 - description: The second service provided. No list items
-  date: 2022-09-20
-  hours: 10
+  date: 2022-10-20
+  hours: 30
   rate: 30
   details:
 

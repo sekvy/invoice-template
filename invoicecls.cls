@@ -59,7 +59,12 @@
 
 % Formatting numbers
 \RequirePackage{siunitx}
-\sisetup{round-integer-to-decimal, group-separator={,}}
+% Using thinspace for group separator instead of , or . to avoid locale specific settings and confusion.
+\sisetup{round-integer-to-decimal, group-separator={\thinspace}}
+% Map babel setting to sisetup locale setting. This change the decimal separator.
+\addto\extrasenglish{\sisetup{locale = US}}
+\addto\extrasfrench{\sisetup{locale = FR}}
+\addto\extrasswedish{\sisetup{locale = FR}}
 
 \RequirePackage{fontspec}
 
@@ -152,6 +157,23 @@
 
 \gdef\InvoiceTotal{0}
 
+\newcommand{\subtotal}{%
+    \InvoiceTotal%
+}
+
+\newcommand{\vattotal}{%
+    \FPmul\p{\vatPercent}{0.01}%
+    \FPmul\result{\p}{\subtotal}%
+    \formatcurrency{\result}%
+}
+
+\newcommand{\total}{%
+    \FPmul\p{\vatPercent}{0.01}%
+    \FPadd\pp{\p}{1}%
+    \FPmul\result{\pp}{\subtotal}%
+    \formatcurrency{\result}%
+}
+
 \newcommand*{\calcamount}[2]{%
     \FPmul\t{#1}{#2}%
     \formatcurrency{\t}%
@@ -219,7 +241,7 @@
 }
 
 \newcommand*{\formatcurrency}[1]{%
-    \num[group-separator={,}, group-minimum-digits=3, round-mode=places, round-precision=2]{#1}%
+    \num[group-separator={\thinspace}, group-minimum-digits=3, round-mode=places, round-precision=2]{#1}%
 }
 
 % Implementation by Werner (http://tex.stackexchange.com/a/176815/35707)
