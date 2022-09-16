@@ -91,7 +91,7 @@
 }
 
 \newcommand*{\twocolumnlayout}[2]{
-    #1 \hfill #2
+ \enspace #1 \hfill #2 \enspace
 }
 
 \sodef\invoiceSpacing{}{.15em}{.4em}{.4em}
@@ -125,8 +125,8 @@
 \newcommand*{\infoSectionStyle}{\hspace{2em}}
 \newcommand*{\infoSubStyle}{\small}
 
-\newenvironment*{infoSection}[1]{\tabular[t]{l}\titleStyle{#1:}\\}{\endtabular}
-\newenvironment*{footerSection}[1]{\tabular[t]{l}\footerTitleStyle{#1:}\\}{\endtabular}
+\newenvironment*{infoSection}[1]{\tabular[t]{@{}l@{}}\titleStyle{#1:}\\}{\endtabular}
+\newenvironment*{footerSection}[1]{\tabular[t]{@{}l@{}}\footerTitleStyle{#1:}\\}{\endtabular}
 \newcommand{\sectionItem}[1]{#1 \\}
 
 \newcommand{\emaillink}[1]{%
@@ -243,6 +243,7 @@
 \newcommand*{\formatcurrency}[1]{%
     \num[group-separator={\thinspace}, group-minimum-digits=3, round-mode=places, round-precision=2]{#1}%
 }
+
 
 % Implementation by Werner (http://tex.stackexchange.com/a/176815/35707)
 \newcommand*{\dectofrac}[1]{\begingroup%

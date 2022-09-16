@@ -55,7 +55,9 @@
 \vfill
 \noindent\rule{\textwidth}{1pt}
 \textbf{\me}
-\begin{multicols}{3}
+\vspace{1em}
+
+\begin{tabularx}{\textwidth}{X@{} @{}X@{} @{}X}
     % Contact
     \begin{footerSection}{Contact}
         $for(addressLines)$
@@ -67,17 +69,18 @@
                 \contactIconItem{\faMobile}{$contact.phone$}
                 \contactIconItem{\small\faEnvelopeO}{$contact.email$}
             \end{contactIconItemization}
-        }
-    \end{footerSection} \columnbreak \newline %
+        } 
+    \end{footerSection} & %
     % VAT number
     \begin{footerSection}{VAT no}
         \sectionItem{$VATno$}
-    \end{footerSection} \columnbreak \newline %
+    \end{footerSection} & %
     % Bank account info
     \begin{footerSection}{Bank account info}
         $for(bank)$
             \sectionItem{$bank$}
         $endfor$
-    \end{footerSection}\columnbreak
-\end{multicols}
+    \end{footerSection}
+\end{tabularx}
+
 \end{document}
