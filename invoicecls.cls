@@ -41,7 +41,6 @@
 
 % For tables
 \RequirePackage{tabularx}
-\RequirePackage{multicol}
 
 % Dates
 \RequirePackage{advdate}
@@ -61,7 +60,7 @@
 \RequirePackage{siunitx}
 % Using thinspace for group separator instead of , or . to avoid locale specific settings and confusion.
 \sisetup{round-integer-to-decimal, group-separator={\thinspace}}
-% Map babel setting to sisetup locale setting. This change the decimal separator.
+% Map babel setting to sisetup locale setting. This changes the decimal separator.
 \addto\extrasenglish{\sisetup{locale = US}}
 \addto\extrasfrench{\sisetup{locale = FR}}
 \addto\extrasswedish{\sisetup{locale = FR}}
@@ -91,7 +90,7 @@
 }
 
 \newcommand*{\twocolumnlayout}[2]{
- \enspace #1 \hfill #2 \enspace
+    \enspace #1 \hfill #2 \enspace
 }
 
 \sodef\invoiceSpacing{}{.15em}{.4em}{.4em}
@@ -122,9 +121,6 @@
     \DTMlangsetup{showdayofmonth=true}
 }
 
-\newcommand*{\infoSectionStyle}{\hspace{2em}}
-\newcommand*{\infoSubStyle}{\small}
-
 \newenvironment*{infoSection}[1]{\tabular[t]{@{}l@{}}\titleStyle{#1:}\\}{\endtabular}
 \newenvironment*{footerSection}[1]{\tabular[t]{@{}l@{}}\footerTitleStyle{#1:}\\}{\endtabular}
 \newcommand{\sectionItem}[1]{#1 \\}
@@ -137,20 +133,19 @@
 \newcommand*{\itemizationHeaderStyle}[0]{\normalsize}
 \newcounter{colskipcount}
 
-\newenvironment{hoursItemization}
-  {   \setcounter{colskipcount}{4}
-      \tabularx{\textwidth}{c X c r r}
-      \hline
-      \noalign{\smallskip}
-      {\itemizationHeaderStyle Date} &
-      {\itemizationHeaderStyle Description} &
-      {\itemizationHeaderStyle Hours} &
-      {\itemizationHeaderStyle Rate}  &
-      {\itemizationHeaderStyle Amount} \\
-      \hline
-      \noalign{\bigskip}
-  }
-  {\endtabularx}
+\newenvironment{hoursItemization}{%
+    \setcounter{colskipcount}{4}
+    \tabularx{\textwidth}{c X c r r}
+    \hline
+    \noalign{\smallskip}
+    {\itemizationHeaderStyle Date} &
+    {\itemizationHeaderStyle Description} &
+    {\itemizationHeaderStyle Hours} &
+    {\itemizationHeaderStyle Rate}  &
+    {\itemizationHeaderStyle Amount} \\
+    \hline
+    \noalign{\bigskip}
+}{\endtabularx}
 
 \newenvironment{contactIconItemization}{\tabular[t]{@{}c@{}@{}l@{}}}{\endtabular}
 \newcommand{\contactIconItem}[2]{#1 & \hspace{8pt}\small#2\\}
@@ -243,7 +238,6 @@
 \newcommand*{\formatcurrency}[1]{%
     \num[group-separator={\thinspace}, group-minimum-digits=3, round-mode=places, round-precision=2]{#1}%
 }
-
 
 % Implementation by Werner (http://tex.stackexchange.com/a/176815/35707)
 \newcommand*{\dectofrac}[1]{\begingroup%
